@@ -19,7 +19,7 @@ const io = socket(server)
 var players;
 var joined = true;
 
-var serviceAccount = require("/root/piapp/nodejs.json");
+var serviceAccount = require("../piapp/nodejs.json");
 
 
 admin.initializeApp({
