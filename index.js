@@ -11,7 +11,7 @@ const CURRENT_VERSION = 1;
 const piNetworkApi = 'socialchain.app/v2'
 const API_KEY = 'dgxxumldooihfvvtes576er2bhudyfmsmphbuax021iiolgl3sw2z9kdcomlp6tp'
 
-const port = 80
+const port = 80;
 
 var app = express();
 const server = http.createServer(app)
