@@ -1,34 +1,74 @@
+# Yumito
+### ( An online food delivery application )
+In this project, one can login, register, follow the menu, go through the offers which the restaurant had and order the food. Also, user can edit their profile and can log off.\
+This was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
+Created using __React, React Hooks like useContext & useReducer, ES6, JSX, Bootstrap5, CSS__\
+Deployed in Firebase cloud.\
+Check it out my app here: [yumito-app](https://yumitotaste.firebaseapp.com)
 
-[Live site URL](https://gomealres.netlify.app/)
+## Available Scripts
 
+In the project directory, you can run:
 
-# Fast Food Delivery App
+### `npm start`
 
-Welcome to the Fast Food Delivery App – your ultimate solution for quick and convenient food ordering. Our application is built with React, Redux, Tailwind CSS, and Firebase, delivering a seamless and efficient food ordering experience.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Key Features
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-### Menu and Item Filtering
-- Our app offers a diverse menu selection for your culinary pleasure. Easily explore and filter menu items, ensuring you find the perfect dish to satisfy your cravings.
+### `npm test`
 
-### Shopping Cart Management
-- Seamlessly add items to your shopping cart, update quantities, and remove items as you like. Our dynamic cart system instantly calculates the total price, enabling you to review your selections before checkout.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### User Authentication
-- For a secure and personalized experience, we provide robust user authentication. Sign up with your email and password, and securely manage your personal information.
+### `npm run build`
 
-### Easy Address Entry
-- When creating an order, you can either manually enter your delivery address or effortlessly retrieve your current location using geolocation. Our app makes it easy for you to provide the right address.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### Order Creation
-- When you're ready to satisfy your hunger, proceed to checkout, and effortlessly create an order. We've streamlined the process for a hassle-free transaction.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Technologies Used
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- **React**: We've developed our app with React, a popular JavaScript library for building user interfaces. React's component-based structure ensures modular development and efficient rendering of dynamic content.
+### `npm run eject`
 
-- **Redux**: Redux is our choice for state management, offering a centralized and predictable way to manage and share data between components.
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-- **Tailwind CSS**: Our user interface is styled with Tailwind CSS, a utility-first CSS framework known for its rapid and responsive design development.
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-- **Firebase**: We rely on Firebase for user authentication, ensuring a secure and reliable environment for account creation and login.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
