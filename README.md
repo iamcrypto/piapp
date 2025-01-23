@@ -1,74 +1,69 @@
-# Yumito
-### ( An online food delivery application )
-In this project, one can login, register, follow the menu, go through the offers which the restaurant had and order the food. Also, user can edit their profile and can log off.\
-This was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
-Created using __React, React Hooks like useContext & useReducer, ES6, JSX, Bootstrap5, CSS__\
-Deployed in Firebase cloud.\
-Check it out my app here: [yumito-app](https://yumitotaste.firebaseapp.com)
+# Welcome to your Lovable project
 
-## Available Scripts
+## Project info
 
-In the project directory, you can run:
+**URL**: https://lovable.dev/projects/e9243b91-bfe2-4ae1-8ae7-3a679e930b79
 
-### `npm start`
+## How can I edit this code?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+There are several ways of editing your application.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**Use Lovable**
 
-### `npm test`
+Simply visit the [Lovable Project](https://lovable.dev/projects/e9243b91-bfe2-4ae1-8ae7-3a679e930b79) and start prompting.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Changes made via Lovable will be committed automatically to this repo.
 
-### `npm run build`
+**Use your preferred IDE**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Follow these steps:
 
-### `npm run eject`
+```sh
+# Step 1: Clone the repository using the project's Git URL.
+git clone <YOUR_GIT_URL>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Step 2: Navigate to the project directory.
+cd <YOUR_PROJECT_NAME>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Step 3: Install the necessary dependencies.
+npm i
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Step 4: Start the development server with auto-reloading and an instant preview.
+npm run dev
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**Edit a file directly in GitHub**
 
-## Learn More
+- Navigate to the desired file(s).
+- Click the "Edit" button (pencil icon) at the top right of the file view.
+- Make your changes and commit the changes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Use GitHub Codespaces**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Navigate to the main page of your repository.
+- Click on the "Code" button (green button) near the top right.
+- Select the "Codespaces" tab.
+- Click on "New codespace" to launch a new Codespace environment.
+- Edit files directly within the Codespace and commit and push your changes once you're done.
 
-### Code Splitting
+## What technologies are used for this project?
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is built with .
 
-### Analyzing the Bundle Size
+- Vite
+- TypeScript
+- React
+- shadcn-ui
+- Tailwind CSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## How can I deploy this project?
 
-### Making a Progressive Web App
+Simply open [Lovable](https://lovable.dev/projects/e9243b91-bfe2-4ae1-8ae7-3a679e930b79) and click on Share -> Publish.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## I want to use a custom domain - is that possible?
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
