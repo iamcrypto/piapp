@@ -3,7 +3,7 @@ import { MenuItem } from "@/components/MenuItem";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const restaurants = [
   {
     id: "1",
@@ -165,6 +165,14 @@ export default function Index() {
                     <div className="flex justify-between items-center font-bold">
                       <p>Total</p>
                       <p>₹{cartTotal}</p>
+					  
+					   <p className="mt-2 text-sm text-gray-600">
+                        {" "}
+            <Link to="/login" className="font-medium text-primary hover:text-primary/90">
+              CHECKOUT
+            </Link>
+          </p>
+					  
                     </div>
                   </div>
                 </div>
