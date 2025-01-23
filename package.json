@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
-    "firebase": "^10.5.0",
+    "firebase": "^10.9.0",
     "food-delivery-app": "file:",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
