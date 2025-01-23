@@ -72,6 +72,12 @@ const Login = () => {
               Sign in
             </Button>
           </form>
+		     <p className="mt-2 text-sm text-gray-600">
+            {" "}
+            <Link to="/register" className="font-medium text-primary hover:text-primary/90">
+              Register
+            </Link>
+          </p>
         </Form>
       </div>
     </div>
