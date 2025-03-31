@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cron Alert Demo</title>
+</head>
+<body>
+  <h1>Node-cron Scheduled Alerts</h1>
+  <p id="alert-message">Waiting for alerts...</p>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const alertMessage = document.getElementById('alert-message');
+    const socket = io();
+
+    // Listen for alerts from the backend
+    socket.on('alert', (message) => {
+      alert(message); // Display an alert
+      alertMessage.textContent = message; // Update the message on the webpage
+    });
+  </script>
+</body>
+</html>
+
