@@ -7,10 +7,10 @@ const axios = require("axios")
 const CURRENT_VERSION = 1;
 
 const piNetworkApi = 'api.minepi.com/v2'
-const API_KEY = '7zmiczxjrj9w2a1bkiq6yveaxvtvxhznxsgghrmq5fjpvphatxryxlicdciwrag6'
+const API_KEY = 't3rfmdht1odwawijsh0wwdozozqaislivnf4pioutezhj5rgbl2beymdehm4o5pc'
                  //API key obtained from app in develop portal
 
-const port =  3001
+const port =  3005
 
 var app = express();
 const server = http.createServer(app)
