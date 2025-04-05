@@ -62,8 +62,6 @@ app.post('/approve', async (req, res) => {
 });
 ```
 
-GitHub Copilot
-Here’s how the explanation can be written into a Markdown file:
 
 1 vulnerability
 Approve Payment (POST /approve)
