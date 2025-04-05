@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Score Board</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script type="text/javascript">
+    $( document ).ready(function() {
+        var queries = {};
+  $.each(document.location.search.substr(1).split('&'),function(c,q){
+    var i = q.split('=');
+    queries[i[0].toString()] = i[1].toString();
+  });
+  urlname = queries['nme'];
+  axios.post('/GetUser', {
+    UserName: urlname,
+  }).then((response) => {
+    tableBody = $("#client_record tbody")
+    tableBody.empty();
+    for(i=0; i<(response.data).length; i++) {
+        let name = response.data[i].name;  
+        let loc =response.data[i].loc;
+        let time = response.data[i].time;
+        let date = response.data[i].date;
+        let status = response.data[i].status;
+        markup = "<tr><td>"+loc+"</td><td>"+date+"</td><td> "+time+"</td><td>"+status+"</td></tr>";
+        tableBody.append(markup);
+    }
+}, (error) => {
+    console.log(error);
+});
+axios.get('/getusers')
+.then((response) => {
+    var lookup = {},
+    result = [];
+    for (i=0; i<(response.data).length; i++) {
+        var name = response.data[i].name;
+        if (!(name in lookup)) {
+            lookup[name] = 1;
+            result.push(name);
+        }
+    }
+    tableBody = $("#global_record tbody")
+    tableBody.empty();
+    for (i=0; i<(result).length; i++) {
+        var unusername = result[i];
+        var woncount = 0;
+        var loosecount = 0;
+        axios.post('/GetUser', {
+          UserName: result[i],
+  }).then((response) => {
+    var stus = [];
+    var nme = '';
+    for(i=0; i<(response.data).length; i++) {
+        let status = response.data[i].status;
+        let name = response.data[i].name;
+        stus.push(status);
+        nme = name;
+        if(status=="Won")
+        {
+            woncount=++woncount;
+        }
+        if(status=="Loose")
+        {
+            loosecount=++loosecount;
+        }
+    }
+    markup = "<tr><td>"+nme+"</td><td>"+woncount+"</td><td> "+loosecount+"</td></tr>";
+    tableBody.append(markup);
+    woncount = 0;
+    loosecount = 0;
+}, (error) => {
+    console.log(error);
+});
+
+    }
+    console.log(response.data[0].first_name);
+    console.log(response.status);
+});
+  $("#userNme").html("UserName: "+urlname);
+});
+    </script>
+     <script type="text/javascript">
+      $( document ).ready(function() {
+          const Pi = window.Pi;
+          Pi.init({ version: "2.0", sandbox: false });
+          async function auth() {
+              try {
+                  // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.
+                  const scopes = ['username', 'payments'];
+                  function onIncompletePaymentFound(payment) {
+                      
+                  }; // Read more about this in the SDK reference
+  
+                  Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+                      $("#username").html(" " + auth.user.username);
+                  }).catch(function(error) {
+                      //Pi.openShareDialog("Error", error);
+                      //alert(err);
+                      console.log(error);
+                  });
+              } catch (err) {
+                  //Pi.openShareDialog("Error", err);
+                  //alert(err);
+                  console.log(err);
+                  // Not able to fetch the user
+              }
+          }
+          
+          auth();
+          
+          const shareData = {
+              title: 'Chessboard live Platform',
+              text: 'Hi. Check it out this Pi App: Chessboard Live Platform (Pi Network Games from LIVE TELECAST). Try it in Pi Browser. #PiNetwork #PiApps https://livetelecast.online/',
+              //url: 'https://livetelecast.online/',
+          }
+  
+          //$("#social_div").css("visibility", "visible");
+          const btn = document.querySelector('#button1');
+          //const resultPara = document.querySelector('.result');
+          
+          // Must be triggered some kind of "user activation"
+          btn.addEventListener('click', async () => {
+              if (!navigator.share) {
+                  Pi.openShareDialog(shareData.title, shareData.text);
+              }else
+              {
+                try {
+                  await navigator.share(shareData);
+                  //resultPara.textContent = 'MDN shared successfully'
+                } catch(err) {
+                  //alert('Error: ' + err);
+                }
+              }
+          });
+      });
+  
+  </script>
+  <style>
+      .scoreul
+      {
+        margin-top: 50px; 
+      }
+      #home img{
+          height: 200px;
+      }
+      #client_record,#global_record
+      {
+          width: 70% !important;
+          border:1px solid;
+      }
+      #client_record th,#global_record th
+      {
+          text-align:center;
+      }
+      #client_record td,#client_record th,#global_record td, #global_record th{
+        border:1px solid;
+      }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="container" style="text-align:center">
+    <br/>Hi<strong><span id="username"></span></strong>. Welcome to Pi Network Games from Livetelecast (online).<br/><br/>			 
+</div>
+  <h2>Score Card</h2>
+  <div id="divuserNme"><h4 id="userNme"></h4></div>
+  <ul class="nav nav-pills scoreul">
+    <li class="active"><a data-toggle="pill" href="#menu1">All Records</a></li>
+    <li><a data-toggle="pill" href="#menu2">Global Score</a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div id="menu1" class="tab-pane fade">
+      <h3>All my Scores</h3>
+      <table id="client_record">
+          <thead>
+              <tr>
+                <th>Location</th>
+              <th>Date</th>
+              <th>Time Span</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          </tbody>
+      </table>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Global Score</h3>
+      <table id="global_record">
+        <thead>
+            <tr>
+              <th>Username</th>
+            <th>Won Count</th>
+            <th>Loose Count</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    </div>
+  </div>
+  <div class="container form-group" style="text-align:center">
+    <label style="color: rgb(41, 9, 219);">Payment towards Registration</label><br>
+    <input id="pi_donate" name="pi_donate" class="form-text" type="number" placeholder="Any Amount of Pi  0.5-5" min="0" step="0.01" lang="en-US" />
+    <input id="button_click" name="button_click" value="Pay" type="button" class="btn btn-primary" />
+    </div>
+</div>
+<script type="text/javascript">
+  $( document ).ready(function() {
+      const Pi = window.Pi;
+      Pi.init({ version: "2.0", sandbox: false });
+
+      //alert(PiNetworkClient);
+
+      async function auth() {
+          try {
+              // Identify the user with their username / unique network-wide ID, and get permission to request payments from them.
+              const scopes = ['username', 'payments'];
+              function onIncompletePaymentFound(payment) {
+                  
+                  var data = {
+                          'action': 'complete',
+                          'paymentId': payment.identifier,
+                          'txid': payment.transaction.txid,
+                          'app_client': 'livetelecast'
+                      };
+                  return axios.post('/complete', {
+                        paymentId: payment.identifier,
+                        txid:payment.transaction.txid,
+                    }).then((response) => {
+                      $("#button_click").prop( "disabled", false );
+                    }, (error) => {
+                      console.log(error);
+                      $("#button_click").prop( "disabled", false );
+                    });
+              }; // Read more about this in the SDK reference
+
+              Pi.authenticate(scopes, onIncompletePaymentFound).then(function(auth) {
+                $( "#button_click" ).click(function() {
+                      if(parseFloat($("#pi_donate").val()) > 0)
+                      {
+                          $("#button_click").prop( "disabled", true );
+                          /*setTimeout(function ()
+                          {
+                              $("#button_click").prop( "disabled", false );
+                          }, 10000);*/
+                          transfer();
+                      }
+                      //alert("Click");
+                  });
+                  //alert('Hello ' + auth.user.username);
+              }).catch(function(error) {
+                console.error(error);
+              });
+          } catch (err) {
+              alert(err);
+              // Not able to fetch the user
+          }
+      }
+
+      async function transfer() {
+          try {
+              const payment = Pi.createPayment({
+                // Amount of π to be paid:
+                amount: parseFloat($("#pi_donate").val()),
+                // An explanation of the payment - will be shown to the user:
+                memo: "Registration towards Chessboard Live tournament", // e.g: "Digital kitten #1234",
+                // An arbitrary developer-provided metadata object - for your own usage:
+                metadata: { paymentType: "donation" /* ... */ }, // e.g: { kittenId: 1234 }
+              }, {
+                // Callbacks you need to implement - read more about those in the detailed docs linked below:
+                onReadyForServerApproval: function(paymentId) {
+                    var data = {
+                              'action': 'approve',
+                              'paymentId': paymentId,
+                              'txid': '',
+                              'app_client': 'livetelecast'
+                          };
+                    return axios.post('/approve', {
+                      paymentId: paymentId,
+                    }).then((response) => {
+                      $("#button_click").prop( "disabled", false );
+                    }, (error) => {
+                      console.log(error);
+                      $("#button_click").prop( "disabled", false );
+                    });
+                },
+                onReadyForServerCompletion: function(paymentId, txid) {
+                      var data = {
+                          'action': 'complete',
+                          'paymentId': paymentId,
+                          "txid": txid,
+                          'app_client': 'livetelecast'
+                      };
+                      return axios.post('/complete', {
+                        paymentId: paymentId,
+                        txid:txid,
+                    }).then((response) => {
+                      $("#button_click").prop( "disabled", false );
+                    }, (error) => {
+                      console.log(error);
+                      $("#button_click").prop( "disabled", false );
+                    });
+                },
+                onCancel: function(paymentId) { $("#button_click").prop( "disabled", false ); /* ... */ },
+                onError: function(error, payment) { $("#button_click").prop( "disabled", false ); /* ... */ },
+              });
+          } catch(err) {
+              $("#button_click").prop( "disabled", false );
+              alert(err);
+              // Technical problem (eg network failure). Please try again
+          }
+      }
+
+      auth();
+
+  });
+</script>
+</body>
+</html>
