@@ -1,69 +1,121 @@
-# Welcome to your Lovable project
+# Pi Network Payment Flow Backend
 
-## Project info
+This Node.js script sets up a backend server to handle payment approvals and completions using the Pi Network API. Below is an explanation of the key components and flow of the application.
 
-**URL**: https://lovable.dev/projects/e9243b91-bfe2-4ae1-8ae7-3a679e930b79
+---
 
-## How can I edit this code?
+## Key Components
 
-There are several ways of editing your application.
+### Dependencies
+The script uses the following dependencies:
+- **`express`**: For creating the server and handling HTTP requests.
+- **`http`**: For creating the HTTP server.
+- **`axios`**: For making HTTP requests to the Pi Network API.
+- **`cors`**: For enabling Cross-Origin Resource Sharing.
 
-**Use Lovable**
+### Constants
+- **`CURRENT_VERSION`**: Tracks the version of the application.
+- **`piNetworkApi`**: The base URL for the Pi Network API.
+- **`API_KEY`**: The API key used for authenticating requests to the Pi Network API.
+- **`port`**: The port on which the server listens (3005).
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e9243b91-bfe2-4ae1-8ae7-3a679e930b79) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## Routes
 
-**Use your preferred IDE**
+### Homepage (`GET /`)
+The server serves the `index.html` file when the root URL (`/`) is accessed.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+```javascript
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Follow these steps:
+Approve Payment (POST /approve)
+This endpoint handles payment approval by sending a POST request to the Pi Network API.
+```js
+app.post('/approve', async (req, res) => {
+  const { paymentId } = req.body; // Extract paymentId from the request body
+  try {
+    // Send a POST request to approve the payment
+    await axios.post(`https://${piNetworkApi}/payments/${paymentId}/approve`, {}, {
+      headers: {
+        'Authorization': `Key ${API_KEY}` // Include API key in the headers
+      }
+    });
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+    // Respond with success
+    return res.status(200).send({
+      message: 'Payment approved!',
+      status: 'success'
+    });
+  } catch (err) {
+    console.log(err); // Log the error for debugging
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+    // Respond with an error message
+    return res.status(500).send({
+      message: `There has been an error!`,
+      status: 'error'
+    });
+  }
+});
 ```
 
-**Edit a file directly in GitHub**
+GitHub Copilot
+Here’s how the explanation can be written into a Markdown file:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1 vulnerability
+Approve Payment (POST /approve)
+This endpoint handles payment approval by sending a POST request to the Pi Network API.
 
-**Use GitHub Codespaces**
+Complete Payment (POST /complete)
+This endpoint finalizes a payment by sending a POST request to the Pi Network API with a transaction ID (txid).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```js
 
-## What technologies are used for this project?
+app.post('/complete', async (req, res) => {
+  const { paymentId, txid } = req.body; // Extract paymentId and txid from the request body
+  try {
+    // Send a POST request to complete the payment
+    await axios.post(`https://${piNetworkApi}/payments/${paymentId}/complete`, {
+      txid // Include the transaction ID in the request body
+    }, {
+      headers: {
+        'Authorization': `Key ${API_KEY}` // Include API key in the headers
+      }
+    });
 
-This project is built with .
+    // Respond with success
+    return res.status(200).send({
+      message: 'Payment completed!',
+      status: 'success'
+    });
+  } catch (err) {
+    console.log(err); // Log the error for debugging
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+    // Respond with an error message
+    return res.status(500).send({
+      message: `There has been an error!`,
+      status: 'error'
+    });
+  }
+});
+```
+Server Initialization
+The server listens on port 3005 and logs a message when it starts.
+```js
+server.listen(port);
+console.log('Connected');
+```
+Payment Flow Summary
+Approve Payment (/approve):
 
-## How can I deploy this project?
+The client sends a POST request with a paymentId.
+The server sends a request to the Pi Network API to approve the payment.
+If successful, it responds with a success message.
+Complete Payment (/complete):
 
-Simply open [Lovable](https://lovable.dev/projects/e9243b91-bfe2-4ae1-8ae7-3a679e930b79) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+The client sends a POST request with a paymentId and txid.
+The server sends a request to the Pi Network API to complete the payment.
+If successful, it responds with a success message.
