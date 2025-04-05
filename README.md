@@ -26,12 +26,12 @@ The script uses the following dependencies:
 ### Homepage (`GET /`)
 The server serves the `index.html` file when the root URL (`/`) is accessed.
 
-```javascript
+```js
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
-
+```
 Approve Payment (POST /approve)
 This endpoint handles payment approval by sending a POST request to the Pi Network API.
 ```js
@@ -72,8 +72,8 @@ This endpoint handles payment approval by sending a POST request to the Pi Netwo
 Complete Payment (POST /complete)
 This endpoint finalizes a payment by sending a POST request to the Pi Network API with a transaction ID (txid).
 
-```js
 
+```js
 app.post('/complete', async (req, res) => {
   const { paymentId, txid } = req.body; // Extract paymentId and txid from the request body
   try {
